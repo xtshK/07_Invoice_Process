@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProcureFlow | Modern Procurement</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <span class="material-symbols-rounded" style="color: white;">hexagon</span>
+                </div>
+                <span>ProcureFlow</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-item active">
+                        <span class="material-symbols-rounded">dashboard</span>
+                        <span>Dashboard</span>
+                    </a></li>
+                <li><a href="#" class="nav-item">
+                        <span class="material-symbols-rounded">receipt_long</span>
+                        <span>Requests</span>
+                    </a></li>
+                <li><a href="#" class="nav-item">
+                        <span class="material-symbols-rounded">inventory_2</span>
+                        <span>Inventory</span>
+                    </a></li>
+                <li><a href="#" class="nav-item">
+                        <span class="material-symbols-rounded">analytics</span>
+                        <span>Reports</span>
+                    </a></li>
+                <li><a href="#" class="nav-item">
+                        <span class="material-symbols-rounded">settings</span>
+                        <span>Settings</span>
+                    </a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar animate-in">
+                <div class="page-title">
+                    <h1 id="greeting">Good Morning, Alex</h1>
+                    <p>Here's what's happening with your procurement today.</p>
+                </div>
+
+                <div class="user-actions">
+                    <button class="btn-icon">
+                        <span class="material-symbols-rounded">search</span>
+                    </button>
+                    <button class="btn-icon">
+                        <span class="material-symbols-rounded">notifications</span>
+                    </button>
+                    <button class="btn-primary">
+                        <span class="material-symbols-rounded">add</span>
+                        New Request
+                    </button>
+                </div>
+            </header>
+
+            <!-- Stats Grid -->
+            <div class="dashboard-grid">
+                <div class="stat-card animate-in" style="animation-delay: 0.1s;">
+                    <div class="stat-header">
+                        <span>Pending Requests</span>
+                        <div class="stat-icon" style="color: var(--warning);">
+                            <span class="material-symbols-rounded">pending</span>
+                        </div>
+                    </div>
+                    <div class="stat-value">12</div>
+                    <div class="stat-trend trend-up">
+                        <span class="material-symbols-rounded">trending_up</span>
+                        <span>+2 from yesterday</span>
+                    </div>
+                </div>
+
+                <div class="stat-card animate-in" style="animation-delay: 0.2s;">
+                    <div class="stat-header">
+                        <span>Approved (Mo)</span>
+                        <div class="stat-icon" style="color: var(--success);">
+                            <span class="material-symbols-rounded">check_circle</span>
+                        </div>
+                    </div>
+                    <div class="stat-value">45</div>
+                    <div class="stat-trend trend-up">
+                        <span class="material-symbols-rounded">trending_up</span>
+                        <span>+12% vs last month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card animate-in" style="animation-delay: 0.3s;">
+                    <div class="stat-header">
+                        <span>Total Spend</span>
+                        <div class="stat-icon" style="color: var(--accent);">
+                            <span class="material-symbols-rounded">payments</span>
+                        </div>
+                    </div>
+                    <div class="stat-value">$24,500</div>
+                    <div class="stat-trend trend-down">
+                        <span class="material-symbols-rounded">trending_down</span>
+                        <span>-5% vs budget</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Requests Table -->
+            <div class="section-header animate-in" style="animation-delay: 0.4s;">
+                <h2>Recent Requests</h2>
+                <button class="btn-icon" style="width: auto; padding: 0 1rem; border-radius: 8px; font-size: 0.9rem;">
+                    View All
+                </button>
+            </div>
+
+            <div class="table-container animate-in" style="animation-delay: 0.5s;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Item</th>
+                            <th>Department</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#REQ-2024-001</td>
+                            <td>MacBook Pro M3</td>
+                            <td>Engineering</td>
+                            <td>$2,499.00</td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                            <td>Oct 24, 2024</td>
+                        </tr>
+                        <tr>
+                            <td>#REQ-2024-002</td>
+                            <td>Office Chairs (x5)</td>
+                            <td>Operations</td>
+                            <td>$1,250.00</td>
+                            <td><span class="status-badge status-approved">Approved</span></td>
+                            <td>Oct 23, 2024</td>
+                        </tr>
+                        <tr>
+                            <td>#REQ-2024-003</td>
+                            <td>Software License</td>
+                            <td>Design</td>
+                            <td>$450.00</td>
+                            <td><span class="status-badge status-rejected">Rejected</span></td>
+                            <td>Oct 22, 2024</td>
+                        </tr>
+                        <tr>
+                            <td>#REQ-2024-004</td>
+                            <td>Server Maintenance</td>
+                            <td>IT</td>
+                            <td>$800.00</td>
+                            <td><span class="status-badge status-approved">Approved</span></td>
+                            <td>Oct 21, 2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
