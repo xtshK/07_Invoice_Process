@@ -7,28 +7,30 @@
     /* Color Palette */
     --bg-dark: #0a0b14;
     --bg-panel: #131524;
-    --primary: #6366f1; /* Indigo */
+    --primary: #6366f1;
+    /* Indigo */
     --primary-glow: rgba(99, 102, 241, 0.4);
-    --accent: #06b6d4; /* Cyan */
+    --accent: #06b6d4;
+    /* Cyan */
     --accent-glow: rgba(6, 182, 212, 0.4);
     --success: #10b981;
     --warning: #f59e0b;
     --danger: #ef4444;
-    
+
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
-    
+
     --glass-bg: rgba(19, 21, 36, 0.7);
     --glass-border: rgba(255, 255, 255, 0.08);
-    
+
     /* Spacing & Radius */
     --radius-lg: 16px;
     --radius-md: 12px;
     --radius-sm: 8px;
-    
+
     --sidebar-width: 260px;
     --header-height: 70px;
-    
+
     /* Transitions */
     --trans-fast: 0.2s ease;
     --trans-med: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -45,7 +47,7 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     overflow-x: hidden;
-    background-image: 
+    background-image:
         radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
         radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
     min-height: 100vh;
@@ -112,7 +114,8 @@ body {
     font-weight: 500;
 }
 
-.nav-item:hover, .nav-item.active {
+.nav-item:hover,
+.nav-item.active {
     background: rgba(255, 255, 255, 0.05);
     color: var(--text-main);
 }
@@ -247,8 +250,13 @@ body {
     gap: 0.25rem;
 }
 
-.trend-up { color: var(--success); }
-.trend-down { color: var(--danger); }
+.trend-up {
+    color: var(--success);
+}
+
+.trend-down {
+    color: var(--danger);
+}
 
 /* Recent Activity Table */
 .section-header {
@@ -270,7 +278,8 @@ table {
     border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
     padding: 1rem 1.5rem;
     text-align: left;
 }
@@ -308,14 +317,32 @@ tr:hover td {
     gap: 0.25rem;
 }
 
-.status-pending { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
-.status-approved { background: rgba(16, 185, 129, 0.15); color: var(--success); }
-.status-rejected { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+.status-pending {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--warning);
+}
+
+.status-approved {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--success);
+}
+
+.status-rejected {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
+}
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .animate-in {
@@ -327,16 +354,137 @@ tr:hover td {
     .sidebar {
         transform: translateX(-100%);
     }
-    
+
     .sidebar.open {
         transform: translateX(0);
     }
-    
+
     .main-content {
         margin-left: 0;
     }
-    
+
     .menu-toggle {
         display: block;
     }
+}
+
+/* style.css - 更新版 */
+
+/* 容器設為 relative，讓下拉選單可以根據它定位 */
+.user-profile-widget {
+    position: relative;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+/* 頭像樣式 */
+.profile-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--accent), var(--primary));
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: white;
+    box-shadow: 0 2px 10px var(--primary-glow);
+    transition: var(--trans-fast);
+}
+
+/* 滑鼠移到容器上時，頭像稍微放大 */
+.user-profile-widget:hover .profile-avatar {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+/* 下拉選單容器 */
+.profile-dropdown {
+    position: absolute;
+    top: 150%;
+    /* 稍微拉開一點距離 */
+    right: 0;
+    width: 280px;
+    /* 稍微加寬讓文字不擠 */
+
+    /* 修正：使用更深的背景色 (95% 不透明)，解決「太透」的問題 */
+    background: rgba(19, 21, 36, 0.95);
+
+    /* 增加背景模糊效果，提升質感 */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    /* 邊框稍微明顯一點 */
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 1.25rem;
+    /* 增加內距 */
+    border-radius: var(--radius-md);
+
+    /* 加強陰影，讓卡片浮起來 */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+
+    /* 動畫設定 */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 顯示狀態 */
+.user-profile-widget:hover .profile-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* 內容樣式優化 */
+.profile-name {
+    font-size: 1.1rem;
+    /* 名字大一點 */
+    font-weight: 600;
+    color: #ffffff;
+    /* 純白 */
+    margin-bottom: 0.25rem;
+}
+
+.profile-email {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* 分隔線淡一點 */
+}
+
+.profile-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* 增加行距 */
+}
+
+.profile-meta span {
+    font-size: 0.85rem;
+    color: var(--accent);
+    /* 青色 */
+    background: rgba(6, 182, 212, 0.1);
+    /* 增加淡淡的背景色塊 */
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+/* 上方的小箭頭 (顏色要跟背景一致) */
+.profile-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 14px;
+    width: 12px;
+    height: 12px;
+    background: rgba(19, 21, 36, 0.95);
+    /* 跟卡片背景色一樣 */
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    transform: rotate(45deg);
+    z-index: 2;
 }

@@ -31,9 +31,13 @@
             </div>
 
             <ul class="nav-menu">
-                <li><a href="#" class="nav-item active">
+                <li><a href="#" class="nav-item active" data-view="dashboard">
                         <span class="material-symbols-rounded">dashboard</span>
                         <span>Dashboard</span>
+                    </a></li>
+                <li><a href="#" class="nav-item" data-view="users">
+                        <span class="material-symbols-rounded">group</span>
+                        <span>Users</span>
                     </a></li>
                 <li><a href="#" class="nav-item">
                         <span class="material-symbols-rounded">receipt_long</span>
@@ -64,6 +68,19 @@
                 </div>
 
                 <div class="user-actions">
+                    <div class="user-profile-widget">
+                        <div class="profile-avatar">
+                            <span class="material-symbols-rounded">person</span>
+                        </div>
+                        <div class="profile-dropdown">
+                            <div class="profile-name" id="profile-name">Alex Chen</div>
+                            <div class="profile-email" id="profile-email">alex.chen@procureflow.com</div>
+                            <div class="profile-meta">
+                                <span id="profile-dept">Department: Engineering</span>
+                                <span id="profile-supervisor">Supervisor: Sarah Smith</span>
+                            </div>
+                        </div>
+                    </div>
                     <button class="btn-icon">
                         <span class="material-symbols-rounded">search</span>
                     </button>
@@ -77,106 +94,124 @@
                 </div>
             </header>
 
-            <!-- Stats Grid -->
-            <div class="dashboard-grid">
-                <div class="stat-card animate-in" style="animation-delay: 0.1s;">
-                    <div class="stat-header">
-                        <span>Pending Requests</span>
-                        <div class="stat-icon" style="color: var(--warning);">
-                            <span class="material-symbols-rounded">pending</span>
+            <!-- Dashboard View -->
+            <div id="dashboard-view">
+                <!-- Stats Grid -->
+                <div class="dashboard-grid">
+                    <div class="stat-card animate-in" style="animation-delay: 0.1s;">
+                        <div class="stat-header">
+                            <span>Pending Requests</span>
+                            <div class="stat-icon" style="color: var(--warning);">
+                                <span class="material-symbols-rounded">pending</span>
+                            </div>
+                        </div>
+                        <div class="stat-value">12</div>
+                        <div class="stat-trend trend-up">
+                            <span class="material-symbols-rounded">trending_up</span>
+                            <span>+2 from yesterday</span>
                         </div>
                     </div>
-                    <div class="stat-value">12</div>
-                    <div class="stat-trend trend-up">
-                        <span class="material-symbols-rounded">trending_up</span>
-                        <span>+2 from yesterday</span>
+
+                    <div class="stat-card animate-in" style="animation-delay: 0.2s;">
+                        <div class="stat-header">
+                            <span>Approved (Mo)</span>
+                            <div class="stat-icon" style="color: var(--success);">
+                                <span class="material-symbols-rounded">check_circle</span>
+                            </div>
+                        </div>
+                        <div class="stat-value">45</div>
+                        <div class="stat-trend trend-up">
+                            <span class="material-symbols-rounded">trending_up</span>
+                            <span>+12% vs last month</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card animate-in" style="animation-delay: 0.3s;">
+                        <div class="stat-header">
+                            <span>Total Spend</span>
+                            <div class="stat-icon" style="color: var(--accent);">
+                                <span class="material-symbols-rounded">payments</span>
+                            </div>
+                        </div>
+                        <div class="stat-value">$24,500</div>
+                        <div class="stat-trend trend-down">
+                            <span class="material-symbols-rounded">trending_down</span>
+                            <span>-5% vs budget</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="stat-card animate-in" style="animation-delay: 0.2s;">
-                    <div class="stat-header">
-                        <span>Approved (Mo)</span>
-                        <div class="stat-icon" style="color: var(--success);">
-                            <span class="material-symbols-rounded">check_circle</span>
-                        </div>
-                    </div>
-                    <div class="stat-value">45</div>
-                    <div class="stat-trend trend-up">
-                        <span class="material-symbols-rounded">trending_up</span>
-                        <span>+12% vs last month</span>
-                    </div>
+                <!-- Recent Requests Table -->
+                <div class="section-header animate-in" style="animation-delay: 0.4s;">
+                    <h2>Recent Requests</h2>
+                    <button class="btn-icon"
+                        style="width: auto; padding: 0 1rem; border-radius: 8px; font-size: 0.9rem;">
+                        View All
+                    </button>
                 </div>
 
-                <div class="stat-card animate-in" style="animation-delay: 0.3s;">
-                    <div class="stat-header">
-                        <span>Total Spend</span>
-                        <div class="stat-icon" style="color: var(--accent);">
-                            <span class="material-symbols-rounded">payments</span>
-                        </div>
-                    </div>
-                    <div class="stat-value">$24,500</div>
-                    <div class="stat-trend trend-down">
-                        <span class="material-symbols-rounded">trending_down</span>
-                        <span>-5% vs budget</span>
-                    </div>
+                <div class="table-container animate-in" style="animation-delay: 0.5s;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Item</th>
+                                <th>Department</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#REQ-2024-001</td>
+                                <td>MacBook Pro M3</td>
+                                <td>Engineering</td>
+                                <td>$2,499.00</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Oct 24, 2024</td>
+                            </tr>
+                            <tr>
+                                <td>#REQ-2024-002</td>
+                                <td>Office Chairs (x5)</td>
+                                <td>Operations</td>
+                                <td>$1,250.00</td>
+                                <td><span class="status-badge status-approved">Approved</span></td>
+                                <td>Oct 23, 2024</td>
+                            </tr>
+                            <tr>
+                                <td>#REQ-2024-003</td>
+                                <td>Software License</td>
+                                <td>Design</td>
+                                <td>$450.00</td>
+                                <td><span class="status-badge status-rejected">Rejected</span></td>
+                                <td>Oct 22, 2024</td>
+                            </tr>
+                            <tr>
+                                <td>#REQ-2024-004</td>
+                                <td>Server Maintenance</td>
+                                <td>IT</td>
+                                <td>$800.00</td>
+                                <td><span class="status-badge status-approved">Approved</span></td>
+                                <td>Oct 21, 2024</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
-            <!-- Recent Requests Table -->
-            <div class="section-header animate-in" style="animation-delay: 0.4s;">
-                <h2>Recent Requests</h2>
-                <button class="btn-icon" style="width: auto; padding: 0 1rem; border-radius: 8px; font-size: 0.9rem;">
-                    View All
-                </button>
-            </div>
-
-            <div class="table-container animate-in" style="animation-delay: 0.5s;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Request ID</th>
-                            <th>Item</th>
-                            <th>Department</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#REQ-2024-001</td>
-                            <td>MacBook Pro M3</td>
-                            <td>Engineering</td>
-                            <td>$2,499.00</td>
-                            <td><span class="status-badge status-pending">Pending</span></td>
-                            <td>Oct 24, 2024</td>
-                        </tr>
-                        <tr>
-                            <td>#REQ-2024-002</td>
-                            <td>Office Chairs (x5)</td>
-                            <td>Operations</td>
-                            <td>$1,250.00</td>
-                            <td><span class="status-badge status-approved">Approved</span></td>
-                            <td>Oct 23, 2024</td>
-                        </tr>
-                        <tr>
-                            <td>#REQ-2024-003</td>
-                            <td>Software License</td>
-                            <td>Design</td>
-                            <td>$450.00</td>
-                            <td><span class="status-badge status-rejected">Rejected</span></td>
-                            <td>Oct 22, 2024</td>
-                        </tr>
-                        <tr>
-                            <td>#REQ-2024-004</td>
-                            <td>Server Maintenance</td>
-                            <td>IT</td>
-                            <td>$800.00</td>
-                            <td><span class="status-badge status-approved">Approved</span></td>
-                            <td>Oct 21, 2024</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Users View -->
+            <div id="users-view" style="display: none;">
+                <div class="section-header animate-in">
+                    <h2>User Directory</h2>
+                    <button class="btn-primary">
+                        <span class="material-symbols-rounded">person_add</span>
+                        Add User
+                    </button>
+                </div>
+                <div class="dashboard-grid" id="users-grid">
+                    <!-- User cards will be injected here -->
+                </div>
             </div>
         </main>
     </div>
