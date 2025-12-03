@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, FileText, Settings, HelpCircle, LogIn } from 'lucide-react';
+import { LayoutDashboard, Users, FileText, Settings, HelpCircle, LogIn, CloudDownload, UserCog } from 'lucide-react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -6,7 +6,9 @@ const Sidebar = () => {
 
     const navItems = [
         { icon: LayoutDashboard, label: 'Dashboard', path: '/' },
-        { icon: Users, label: 'Portfolios', path: '/portfolios' }, // Placeholder path
+        { icon: CloudDownload, label: 'Freshservice', path: '/import' },
+        { icon: UserCog, label: 'Users', path: '/users' },
+        { icon: Users, label: 'Portfolios', path: '/portfolios' },
         { icon: FileText, label: 'Invoices', path: '/invoices' },
         { icon: Settings, label: 'Settings', path: '/settings' },
     ];

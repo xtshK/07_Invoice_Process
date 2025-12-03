@@ -1,15 +1,27 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { Lock, Mail, Eye, EyeOff } from 'lucide-react';
+import { login, isLoggedIn, initializeDemoAccounts } from '../services/authService';
 
 const Login = () => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
     const [error, setError] = useState('');
+
+    // Initialize demo accounts on first load
+    useEffect(() => {
+        initializeDemoAccounts();
+
+        // Redirect if already logged in
+        if (isLoggedIn()) {
+            navigate('/');
+        }
+    }, [navigate]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -20,7 +32,7 @@ const Login = () => {
         setError('');
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Simple validation
@@ -29,12 +41,19 @@ const Login = () => {
             return;
         }
 
-        // Demo login - in production, this would call an API
-        if (formData.email && formData.password) {
-            // Store login state (simple demo - use proper auth in production)
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('userEmail', formData.email);
+        setLoading(true);
+
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        const result = login(formData.email, formData.password);
+
+        setLoading(false);
+
+        if (result.success) {
             navigate('/');
+        } else {
+            setError(result.error);
         }
     };
 
@@ -45,7 +64,7 @@ const Login = () => {
                     <div style={styles.logo}>
                         IS
                     </div>
-                    <h1 style={styles.title}>InvoiceSys</h1>
+                    <h1 style={styles.title}>InvoiceSystem</h1>
                     <p style={styles.subtitle}>Sign in to your account</p>
                 </div>
 
@@ -101,14 +120,28 @@ const Login = () => {
                         <a href="#" style={styles.forgotLink}>Forgot password?</a>
                     </div>
 
-                    <button type="submit" style={styles.submitButton}>
-                        Sign In
+                    <button
+                        type="submit"
+                        style={{
+                            ...styles.submitButton,
+                            opacity: loading ? 0.7 : 1,
+                            cursor: loading ? 'not-allowed' : 'pointer',
+                        }}
+                        disabled={loading}
+                    >
+                        {loading ? 'Signing In...' : 'Sign In'}
                     </button>
 
                     <p style={styles.signupText}>
                         Don't have an account?{' '}
-                        <a href="#" style={styles.signupLink}>Sign up</a>
+                        <Link to="/register" style={styles.signupLink}>Sign up</Link>
                     </p>
+
+                    <div style={styles.demoInfo}>
+                        <p style={styles.demoTitle}>Demo Accounts:</p>
+                        <p style={styles.demoAccount}>admin@invoicesys.com / admin123</p>
+                        <p style={styles.demoAccount}>demo@invoicesys.com / demo123</p>
+                    </div>
                 </form>
             </div>
         </div>
@@ -256,6 +289,25 @@ const styles = {
         color: '#2C5CC5',
         textDecoration: 'none',
         fontWeight: '500',
+    },
+    demoInfo: {
+        marginTop: '1rem',
+        padding: '1rem',
+        background: '#F1F5F9',
+        borderRadius: '8px',
+        textAlign: 'center',
+    },
+    demoTitle: {
+        fontSize: '0.8rem',
+        fontWeight: '600',
+        color: '#475569',
+        marginBottom: '0.5rem',
+    },
+    demoAccount: {
+        fontSize: '0.75rem',
+        color: '#64748B',
+        marginBottom: '0.25rem',
+        fontFamily: 'monospace',
     },
 };
 
