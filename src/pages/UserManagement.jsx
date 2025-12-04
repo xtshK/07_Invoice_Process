@@ -11,17 +11,19 @@ import {
     Clock,
     RefreshCw,
 } from 'lucide-react';
-import { getUsers, getCurrentUser } from '../services/authService';
+import { authApi, usersApi } from '../services/api';
 
 const UserManagement = () => {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
 
-    const loadUsers = () => {
-        const allUsers = getUsers();
-        setUsers(allUsers);
-        setCurrentUser(getCurrentUser());
+    const loadUsers = async () => {
+        const result = await usersApi.getAll();
+        if (result.success) {
+            setUsers(result.users);
+        }
+        setCurrentUser(authApi.getCurrentUser());
     };
 
     useEffect(() => {
@@ -39,17 +41,19 @@ const UserManagement = () => {
         });
     };
 
-    const handleDeleteUser = (userId) => {
+    const handleDeleteUser = async (userId) => {
         if (currentUser && currentUser.id === userId) {
             alert('Cannot delete your own account from here!');
             return;
         }
 
         if (confirm('Are you sure you want to delete this user?')) {
-            const allUsers = getUsers();
-            const updatedUsers = allUsers.filter(u => u.id !== userId);
-            localStorage.setItem('invoicesys_users', JSON.stringify(updatedUsers));
-            loadUsers();
+            const result = await usersApi.delete(userId);
+            if (result.success) {
+                loadUsers();
+            } else {
+                alert(result.error || 'Failed to delete user');
+            }
         }
     };
 
@@ -269,9 +273,9 @@ const UserManagement = () => {
             <div className="card" style={{ marginTop: '1.5rem', padding: '1.5rem' }}>
                 <h3 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '1rem' }}>Storage Information</h3>
                 <div style={{ display: 'grid', gap: '0.5rem', fontSize: '0.875rem', color: '#9BA7B6' }}>
-                    <p><strong>Storage Type:</strong> localStorage (Browser)</p>
-                    <p><strong>Storage Key:</strong> invoicesys_users</p>
-                    <p><strong>Note:</strong> Data is stored locally in this browser only. Clearing browser data will remove all users.</p>
+                    <p><strong>Storage Type:</strong> SQLite Database</p>
+                    <p><strong>Database File:</strong> server/invoicesys.db</p>
+                    <p><strong>Note:</strong> Data is stored in SQLite database on the server.</p>
                 </div>
             </div>
         </div>

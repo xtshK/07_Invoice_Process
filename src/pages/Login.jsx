@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Lock, Mail, Eye, EyeOff } from 'lucide-react';
-import { login, isLoggedIn, initializeDemoAccounts } from '../services/authService';
+import { authApi } from '../services/api';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -13,12 +13,9 @@ const Login = () => {
     });
     const [error, setError] = useState('');
 
-    // Initialize demo accounts on first load
+    // Redirect if already logged in
     useEffect(() => {
-        initializeDemoAccounts();
-
-        // Redirect if already logged in
-        if (isLoggedIn()) {
+        if (authApi.isLoggedIn()) {
             navigate('/');
         }
     }, [navigate]);
@@ -43,10 +40,7 @@ const Login = () => {
 
         setLoading(true);
 
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 500));
-
-        const result = login(formData.email, formData.password);
+        const result = await authApi.login(formData.email, formData.password);
 
         setLoading(false);
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Lock, Mail, Eye, EyeOff, User, Building, Briefcase } from 'lucide-react';
-import { register } from '../services/authService';
+import { authApi } from '../services/api';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -51,10 +51,7 @@ const Register = () => {
 
         setLoading(true);
 
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 500));
-
-        const result = register({
+        const result = await authApi.register({
             name: formData.name,
             email: formData.email,
             password: formData.password,

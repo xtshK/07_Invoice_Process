@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Search, Bell, ChevronDown, LogOut, User, Settings } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUser, logout } from '../services/authService';
+import { authApi } from '../services/api';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -9,12 +9,12 @@ const Header = () => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     useEffect(() => {
-        const currentUser = getCurrentUser();
+        const currentUser = authApi.getCurrentUser();
         setUser(currentUser);
     }, []);
 
-    const handleLogout = () => {
-        logout();
+    const handleLogout = async () => {
+        await authApi.logout();
         navigate('/login');
     };
 

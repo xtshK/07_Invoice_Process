@@ -8,7 +8,6 @@ const Sidebar = () => {
         { icon: LayoutDashboard, label: 'Dashboard', path: '/' },
         { icon: CloudDownload, label: 'Freshservice', path: '/import' },
         { icon: UserCog, label: 'Users', path: '/users' },
-        { icon: Users, label: 'Portfolios', path: '/portfolios' },
         { icon: FileText, label: 'Invoices', path: '/invoices' },
         { icon: Settings, label: 'Settings', path: '/settings' },
     ];
